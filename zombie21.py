@@ -475,9 +475,9 @@ def get_safe_spawn(city):
 def generate_city_layout():
     """
     Divise la zone 0..400 en une grille 20x20.
-    Dans chaque bloc (taille 20x20), on essaie jusqu'à 5 fois de placer un immeuble
+    Dans chaque bloc de taille 20x20, on essaie jusqu'à 5 fois de placer un immeuble
     dans une zone sûre (définie par une marge) et qui n'intersecte pas les routes.
-    La probabilité de placement dans chaque bloc est de 90%.
+    La probabilité de placement dans chaque bloc est de 70%.
     La hauteur des immeubles est tirée aléatoirement entre 10 et 50.
     """
     city = {"buildings": []}
@@ -485,7 +485,7 @@ def generate_city_layout():
     grid_y = 20
     block_size = 400 / grid_x  # 20 unités par bloc
     margin = 2
-    placement_probability = 0.9
+    placement_probability = 0.7
     for i in range(grid_x):
         for j in range(grid_y):
             if random.random() < placement_probability:
@@ -495,7 +495,7 @@ def generate_city_layout():
                     attempts += 1
                     width = random.uniform(2, block_size - 2 * margin)
                     depth = random.uniform(2, block_size - 2 * margin)
-                    height = random.uniform(10, 50)  # hauteur potentiellement plus élevée
+                    height = random.uniform(10, 50)
                     safe_x_min = i * block_size + margin + width/2
                     safe_x_max = (i + 1) * block_size - margin - width/2
                     safe_z_min = j * block_size + margin + depth/2
